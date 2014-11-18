@@ -1,0 +1,90 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Reddit Recommend</title>
+  <meta name="description" content="Recommends Subreddits based on Reddit account history">
+
+  <link rel="stylesheet" href="stylesheets/styles.css?v=1.0">
+</head>
+
+<body>
+    <div id="container">
+        <div class="block" style="cursor:pointer" id="title-block">
+            <div id="title" class="block-inner">
+            </div>
+        </div>
+        <div class="block" id="submit-block">
+            <div class="block-inner">
+                <h1>Try it Out:</h1>
+                <div id="holder" style="width:100%;">
+                    <div id="user-label" style="margin-bottom: 10px"><div id="user-label-span" ><label for="user-input">reddit.com/u/</label></div><input placeholder="username" id="user-input" type="text"><input value="Go" type="button" name="submit-username" id="submit-username"></div >
+                    We'll pull your comment history from reddit and try to give you some new subreddit suggestions.
+                </div>
+            </div>
+        </div>
+        <div class="block" id="loading-block">
+            <div class="block-inner">
+                <h1>Loading...</h1>
+                <div id="holder" style="width:100%; height:35px">
+                    Please wait while we fetch your results!
+                </div>
+            </div>
+        </div>
+        <div class="block" id="statistics-block">
+            <div class="block-inner">
+                <h1>Statistics: </h1>
+                <div id="holder" style="width:100%; ">
+                    <p id="stat-paragraph">
+                    We pulled <span class="stat">3200</span> user comments and compared them to our database of <span class="stat">1100</span> subreddits and 100 other users. With these results, we were able to make <span class="stat">32</span> recommendations.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="block" id="recommendations-block">
+            <div class="block-inner">
+                <h1>Recomendations: </h1>
+                <div id="holder" style="width:100%;">
+                    <table style="width:100%;">
+                        <tr><td>Rank</td><td>Subreddit</td><td>Subscribers</td></tr>
+                        <tr><td><div class="index">1.</div></td><td><a href="http://www.reddit.com/r/funny">reddit.com/r/funny</a></td><td>7164836 subs</td></tr>
+                        <tr><td><div class="index">2.</div></td><td><a href="http://www.reddit.com/r/pics">reddit.com/r/pics</a></td><td>7090610 subs</td></tr>
+                        <tr><td><div class="index">3.</div></td><td><a href="http://www.reddit.com/r/AdviceAnimals">reddit.com/r/AdviceAnimals</a></td><td>4251009 subs</td></tr>
+                        <tr><td><div class="index">4.</div></td><td><a href="http://www.reddit.com/r/todayilearned">reddit.com/r/todayilearned</a></td><td>6947963 subs</td></tr>
+                        <tr><td><div class="index">5.</div></td><td><a href="http://www.reddit.com/r/aww">reddit.com/r/aww</a></td><td>5585414 subs</td></tr>
+                        <tr><td><div class="index">6.</div></td><td><a href="http://www.reddit.com/r/videos">reddit.com/r/videos</a></td><td>6365600 subs</td></tr>
+                        <tr><td><div class="index">7.</div></td><td><a href="http://www.reddit.com/r/WTF">reddit.com/r/WTF</a></td><td>4458045 subs</td></tr>
+                        <tr><td><div class="index">8.</div></td><td><a href="http://www.reddit.com/r/gaming">reddit.com/r/gaming</a></td><td>6313736 subs</td></tr>
+                        <tr><td><div class="index">9.</div></td><td><a href="http://www.reddit.com/r/gifs">reddit.com/r/gifs</a></td><td>4023328 subs</td></tr>
+                        <tr><td><div class="index">10.</div></td><td><a href="http://www.reddit.com/r/leagueoflegends">reddit.com/r/leagueoflegends</a></td><td>585704 subs</td></tr>
+                        <tr><td><div class="index">11.</div></td><td><a href="http://www.reddit.com/r/AskReddit">reddit.com/r/AskReddit</a></td><td>7075030 subs</td></tr>
+                        <tr><td><div class="index">12.</div></td><td><a href="http://www.reddit.com/r/pcmasterrace">reddit.com/r/pcmasterrace</a></td><td>249103 subs</td></tr>
+                        <tr><td><div class="index">13.</div></td><td><a href="http://www.reddit.com/r/trees">reddit.com/r/trees</a></td><td>657215 subs</td></tr>
+                        <tr><td><div class="index">14.</div></td><td><a href="http://www.reddit.com/r/TrollXChromosomes">reddit.com/r/TrollXChromosomes</a></td><td>103393 subs</td></tr>
+                        <tr><td><div class="index">15.</div></td><td><a href="http://www.reddit.com/r/worldnews">reddit.com/r/worldnews</a></td><td>6815057 subs</td></tr>
+                        <tr><td><div class="index">16.</div></td><td><a href="http://www.reddit.com/r/news">reddit.com/r/news</a></td><td>544345 subs</td></tr>
+                        <tr><td><div class="index">17.</div></td><td><a href="http://www.reddit.com/r/mildlyinteresting">reddit.com/r/mildlyinteresting</a></td><td>4140477 subs</td></tr>
+                        <tr><td><div class="index">18.</div></td><td><a href="http://www.reddit.com/r/wow">reddit.com/r/wow</a></td><td>2022647 subs</td></tr>
+                        <tr><td><div class="index">19.</div></td><td><a href="http://www.reddit.com/r/reactiongifs">reddit.com/r/reactiongifs</a></td><td>187379 subs</td></tr>
+                        <tr><td><div class="index">20.</div></td><td><a href="http://www.reddit.com/r/space">reddit.com/r/space</a></td><td>450733 subs</td></tr>
+                        <tr><td><div class="index">10.</div></td><td><a href="http://www.reddit.com/r/technology">reddit.com/r/technology</a></td><td>1729380 subs</td></tr>
+                        <tr><td><div class="index">11.</div></td><td><a href="http://www.reddit.com/r/movies">reddit.com/r/movies</a></td><td>5074119 subs</td></tr>
+                        <tr><td><div class="index">12.</div></td><td><a href="http://www.reddit.com/r/Android">reddit.com/r/Android</a></td><td>5913950 subs</td></tr>
+                        <tr><td><div class="index">13.</div></td><td><a href="http://www.reddit.com/r/nba">reddit.com/r/nba</a></td><td>474332 subs</td></tr>
+                        <tr><td><div class="index">14.</div></td><td><a href="http://www.reddit.com/r/Showerthoughts">reddit.com/r/Showerthoughts</a></td><td>224940 subs</td></tr>
+                        <tr><td><div class="index">15.</div></td><td><a href="http://www.reddit.com/r/Games">reddit.com/r/Games</a></td><td>1713898 subs</td></tr>
+                        <tr><td><div class="index">16.</div></td><td><a href="http://www.reddit.com/r/politics">reddit.com/r/politics</a></td><td>537056 subs</td></tr>
+                        <tr><td><div class="index">17.</div></td><td><a href="http://www.reddit.com/r/DotAsoccer">reddit.com/r/DotAsoccer</a></td><td>3088516 subs</td></tr>
+                        <tr><td><div class="index">18.</div></td><td><a href="http://www.reddit.com/r/DestinyTheGame">reddit.com/r/DestinyTheGame</a></td><td>191413 subs</td></tr>
+                        <tr><td><div class="index">19.</div></td><td><a href="http://www.reddit.com/r/GlobalOffensive">reddit.com/r/GlobalOffensive</a></td><td>291892 subs</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="static/main.js"></script>
+</body>
+</html>

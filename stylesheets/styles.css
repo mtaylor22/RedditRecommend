@@ -1,0 +1,123 @@
+body{
+    margin:0;
+    padding:0;
+    background-color:#444;
+}
+h1, h2, h3, h4, h5{
+    padding:0;
+    margin:0;
+}
+#container{
+    width:560px;
+    position:absolute;
+    left:50%;
+    margin-left:-275px;
+}
+#title{
+    height:132px;
+    background: #800000 url("/images/title.png") no-repeat center;
+}
+.block{
+    margin-top:20px;
+    /*width:500px;*/
+    padding:15px;
+    background-color: white;
+    border-radius:10px;
+    font-family: Helvetica Rounded LT Std, Helvetica, Arial, sans-serif;
+    font-size:16px;
+    color:white;
+}
+.stat{
+    background-color:#333;
+    padding:3px;
+    padding-left:5px;
+    padding-right:5px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+#stat-paragraph{
+    line-height: 20px;
+}
+.block-inner{
+    width:500px;
+    border-radius:10px;
+    padding:15px;
+    background-color: #800000;
+}
+h1{
+    color:#FFF;
+    font-size:32px;
+    font-family: Helvetica Rounded LT Std, Helvetica, Arial, sans-serif;
+    /*border-bottom:4px solid white;*/
+    margin-bottom:10px;
+    width:100%;
+}
+
+#user-label{
+    width:100%;
+}
+#user-label-span{
+    width:110px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color:#444;
+    float:left;
+    height:35px;
+    line-height:35px;
+    text-indent:10px;
+    color:#fff;
+    font-size:14px;
+    font-family: Helvetica Rounded LT Std, Helvetica, Arial, sans-serif;
+}
+#user-input{
+    font-family: Helvetica Rounded LT Std, Helvetica, Arial, sans-serif;
+    text-indent:5px;
+    width:360px;
+    border:none;
+    padding:0;
+    height:35px;
+    line-height:35px;
+    background-color:#fff;
+    font-size:16px;
+    color:#333;
+}
+input{
+    outline:none;
+}
+#submit-username{
+    background-color:#333;
+    /*margin-left:-30px;*/
+    border:0px;
+    width:35px;
+    position:absolute;
+    height:35px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-family: Helvetica Rounded LT Std, Helvetica, Arial, sans-serif;
+    font-size:16px;
+    font-weight:bold;
+    color:#FFFFFF;
+    cursor:pointer;
+}
+#loading-block{
+    display:none;
+}
+#recommendations-block{
+    display:none;
+}
+#recommendations-block a{
+    color:#DDD;
+}
+#statistics-block{
+    display:none;
+}
+.index{
+    padding:5px;
+    background-color:#333;
+    border-radius:10px;
+    width:15px;
+    height:15px;
+    line-height:15px;
+    text-align:center;
+}
