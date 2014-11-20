@@ -1,11 +1,17 @@
 $('#submit-username').click(function(){
     $('#submit-block').fadeOut(function(){
         $('#loading-block').fadeIn(function(){
-            window.setTimeout(function(){
-                $('#loading-block').fadeOut(function(){
-                    $('#recommendations-block, #statistics-block').fadeIn();
-                });
-            }, 500);
+            $.getJSON( "/user", {'username':$('#user-input').val()}, function( data ) {
+                if (data.success) {
+                    $('#loading-block').fadeOut(function () {
+                        $('#recommendations-block, #statistics-block').fadeIn();
+                        $('#stat-comment-num').html(data.redditor.num);
+                    });
+                    redditor = data.redditor;
+                } else {
+                    alert("error");
+                }
+            });
         });
     });
 });
