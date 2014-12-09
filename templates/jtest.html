@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="status">Press button to go!</div>
+    <input type="text" id="username" placeholder="username" value="pepsis_formosa"><input id="go" value="GO" type="button">
+    <div id="list">
+
+    </div>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('#go').click(function(){
+            grabUser($('#username').val());
+        });
+        function grabUser(user) {
+            j = [];
+            $('#status').html("Grabbing user<br>");
+            $.getJSON("http://localhost:20080/getRedditor?username="+user, function (data) {
+                if (data.success) {
+                    tf = data.redditor.tf;
+                    df = data.redditor.df;
+                    subredditCount = data.redditor.sub_count;
+                    $('#status').append("Got User<br>");
+                    $.getJSON("http://localhost:20080/processRedditor?tf="+JSON.stringify(tf)+"&df="+JSON.stringify(df)+"&subredditCount="+JSON.stringify(subredditCount), function (data) {
+                        if (data.success){
+                            var tfidf = data.data.tfidf;
+                            cosine = {};
+                            tc = 0;
+                            for (var t in tfidf) {
+                                if (tfidf.hasOwnProperty(t)) {
+                                    tc++;
+                                }
+                            }
+                            actual_count = 0;
+                            for (var term in tfidf) {
+                                if (tfidf.hasOwnProperty(term)) {
+                                    $('#status').append("Started Processing Term: " + term + "<br>");
+                                    (function(term) {
+                                        $.ajax({
+                                            url: "http://localhost:20080/processTerm?tfidf=" + JSON.stringify(tfidf) + "&post=" + term + "&cosine=" + JSON.stringify({}),
+                                            dataType: 'json',
+                                            async: true,
+                                            success: function (data) {
+                                                if (data.success) {
+                                                    $('#status').append("Done processing term: " + term + "<br>");
+                                                    cosine = mergeObjects(cosine, data.data);
+//                                                    j.push(data.data);
+                                                }
+                                                actual_count++;
+                                                if (actual_count == tc) {
+                                                    alert("Done!");
+                                                    $('#status').append("Done!");
+                                                    var sortable = [];
+                                                    for (var c in cosine)
+                                                        if (cosine.hasOwnProperty(c))
+                                                            sortable.push([c, cosine[c]]);
+                                                    sortable.sort(function (a, b) {
+                                                        return b[1] - a[1]
+                                                    });
+                                                    $('#list').html(JSON.stringify(sortable));
+                                                    a = sortable;
+                                                }
+
+                                            }
+                                        });
+                                    })(term);
+                                }
+                            }
+
+                        } else {
+                            alert("failed to process user data");
+                        }
+                    });
+                } else {
+                    alert("failed to get user");
+                }
+            });
+        }
+        function mergeObjects(a,b) {
+            var c = {};
+            for (var term in a) {
+                if (a.hasOwnProperty(term)) {
+                    c[term ]= a[term]
+                }
+            }
+            for (var t2 in b) {
+                if (b.hasOwnProperty(t2)) {
+                    c[t2] = (a[t2] != undefined)? c[t2]+ b[t2] : b[t2]
+                }
+            }
+            return c;
+        }
+    </script>
+</body>
+</html>

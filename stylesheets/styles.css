@@ -1,7 +1,7 @@
 body{
     margin:0;
     padding:0;
-    background-color:#444;
+    background-color:#333;
 }
 h1, h2, h3, h4, h5{
     padding:0;
@@ -61,7 +61,7 @@ h1{
     width:110px;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    background-color:#444;
+    background-color:#333;
     float:left;
     height:35px;
     line-height:35px;
@@ -120,4 +120,74 @@ input{
     height:15px;
     line-height:15px;
     text-align:center;
+}
+.score{
+    padding:5px;
+    background-color:#333;
+    border-radius:10px;
+    height:15px;
+    line-height:15px;
+    text-align:center;
+}
+#loading-log{
+    width:calc(100% - 20px);
+    margin-top:5px;
+    background-color:#333;
+    border-radius:10px;
+    padding-top:1px;
+    padding-bottom:1px;
+    height:100px;
+    overflow-y:auto;
+    color:#CCC;
+    font-weight: normal;
+    border:10px solid #FFF;
+}
+.featured-li{
+    font-size:28px;
+    color:#fff;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+#subreddit-block h1{
+    margin-bottom: 3px;
+}
+#subreddit-block a{
+    color:#ddd;
+    margin:0; padding:0;
+}
+#subreddit-block p{
+    margin:0; padding:0;
+}
+.ui-slider-handle{
+    outline:none;
+}
+#slider{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+#options-button{
+    margin-top:5px;
+    background-color:#FFF;
+    border-radius:5px;
+    margin-bottom:5px;
+    border:0;
+    font-family: Helvetica Rounded LT Std, Helvetica, Arial, sans-serif;
+    font-size:14px;
+    height:26px;
+    line-height:26px;
+    color:#800000;
+    cursor:pointer;
 }

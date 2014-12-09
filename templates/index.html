@@ -6,11 +6,14 @@
 
   <title>Reddit Recommend</title>
   <meta name="description" content="Recommends Subreddits based on Reddit account history">
-
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css">
   <link rel="stylesheet" href="stylesheets/styles.css?v=1.0">
 </head>
 
 <body>
+    <div style="position:fixed; width:100%; height:100%; overflow:hidden; color:#888; font-family:Lucida console,serif; font-size:10px;">
+        {{words}}
+    </div>
     <div id="container">
         <div class="block" style="cursor:pointer" id="title-block">
             <div id="title" class="block-inner">
@@ -20,16 +23,41 @@
             <div class="block-inner">
                 <h1>Try it Out:</h1>
                 <div id="holder" style="width:100%;">
-                    <div id="user-label" style="margin-bottom: 10px"><div id="user-label-span" ><label for="user-input">reddit.com/u/</label></div><input placeholder="username" id="user-input" type="text"><input value="Go" type="button" name="submit-username" id="submit-username"></div >
+                    <div id="user-label" style="margin-bottom: 10px">
+                        <div id="user-label-span" >
+                            <label for="user-input" id="sType-label">reddit.com/u/</label>
+                        </div>
+                        <input placeholder="username" id="user-input" type="text">
+                        <input value="Go" type="button" name="submit-username" id="submit-username">
+                    </div >
+                    <input type="button" id="options-button" value="Options"><br>
+                    <div id="options-panel" style="display:none;">
+                        <span>How many comments should be pulled? (</span><span id="amount">4</span>)
+                    <div id="slider"></div>
+                    </div>
+                    Search for:<br>
+                        <div style="padding:5px;width:100%;border-radius:5px; margin-top:5px; background-color:#fff; color:#800000">
+                            <form>
+                                <input onclick="$('#sType-label').html('reddit.com/u/')"  class="radio" name="sType" value="recommendation" id="recommendation" type="radio" checked="true">Recommendations
+                                <input onclick="$('#sType-label').html('reddit.com/r/')" class="radio" name="sType" value="subreddit" id="subreddit" type="radio">By Subreddit
+                                <input onclick="$('#sType-label').html('Term: ')"  class="radio" name="sType" value="term" id="term-b" type="radio">By Term
+                            </form>
+                        </div>
+                    <div style="margin-top:10px;" id="operation-description">
                     We'll pull your comment history from reddit and try to give you some new subreddit suggestions.
+                    </div>
                 </div>
             </div>
         </div>
         <div class="block" id="loading-block">
             <div class="block-inner">
                 <h1>Loading...</h1>
-                <div id="holder" style="width:100%; height:35px">
+                <div id="holder" style="width:100%;">
                     Please wait while we fetch your results!
+                    <div id="loading-log">
+                        <ul id="loading-log-list">
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,7 +66,7 @@
                 <h1>Statistics: </h1>
                 <div id="holder" style="width:100%; ">
                     <p id="stat-paragraph">
-                    We pulled <span class="stat" id="stat-comment-num">3200</span> user comments and compared them to our database of <span class="stat">1100</span> subreddits and 100 other users. With these results, we were able to make <span class="stat">32</span> recommendations.
+                    We pulled <span class="stat" id="stat-comment-num">3200</span> tokens and compared them to our database of <span class="stat">123,992</span> tokens from <span class="stat">7667</span> subreddits. With these results, we were able to make <span class="stat">20</span> recommendations.
                     </p>
                 </div>
             </div>
@@ -48,43 +76,37 @@
                 <h1>Recomendations: </h1>
                 <div id="holder" style="width:100%;">
                     <table style="width:100%;">
-                        <tr><td>Rank</td><td>Subreddit</td><td>Subscribers</td></tr>
-                        <tr><td><div class="index">1.</div></td><td><a href="http://www.reddit.com/r/funny">reddit.com/r/funny</a></td><td>7164836 subs</td></tr>
-                        <tr><td><div class="index">2.</div></td><td><a href="http://www.reddit.com/r/pics">reddit.com/r/pics</a></td><td>7090610 subs</td></tr>
-                        <tr><td><div class="index">3.</div></td><td><a href="http://www.reddit.com/r/AdviceAnimals">reddit.com/r/AdviceAnimals</a></td><td>4251009 subs</td></tr>
-                        <tr><td><div class="index">4.</div></td><td><a href="http://www.reddit.com/r/todayilearned">reddit.com/r/todayilearned</a></td><td>6947963 subs</td></tr>
-                        <tr><td><div class="index">5.</div></td><td><a href="http://www.reddit.com/r/aww">reddit.com/r/aww</a></td><td>5585414 subs</td></tr>
-                        <tr><td><div class="index">6.</div></td><td><a href="http://www.reddit.com/r/videos">reddit.com/r/videos</a></td><td>6365600 subs</td></tr>
-                        <tr><td><div class="index">7.</div></td><td><a href="http://www.reddit.com/r/WTF">reddit.com/r/WTF</a></td><td>4458045 subs</td></tr>
-                        <tr><td><div class="index">8.</div></td><td><a href="http://www.reddit.com/r/gaming">reddit.com/r/gaming</a></td><td>6313736 subs</td></tr>
-                        <tr><td><div class="index">9.</div></td><td><a href="http://www.reddit.com/r/gifs">reddit.com/r/gifs</a></td><td>4023328 subs</td></tr>
-                        <tr><td><div class="index">10.</div></td><td><a href="http://www.reddit.com/r/leagueoflegends">reddit.com/r/leagueoflegends</a></td><td>585704 subs</td></tr>
-                        <tr><td><div class="index">11.</div></td><td><a href="http://www.reddit.com/r/AskReddit">reddit.com/r/AskReddit</a></td><td>7075030 subs</td></tr>
-                        <tr><td><div class="index">12.</div></td><td><a href="http://www.reddit.com/r/pcmasterrace">reddit.com/r/pcmasterrace</a></td><td>249103 subs</td></tr>
-                        <tr><td><div class="index">13.</div></td><td><a href="http://www.reddit.com/r/trees">reddit.com/r/trees</a></td><td>657215 subs</td></tr>
-                        <tr><td><div class="index">14.</div></td><td><a href="http://www.reddit.com/r/TrollXChromosomes">reddit.com/r/TrollXChromosomes</a></td><td>103393 subs</td></tr>
-                        <tr><td><div class="index">15.</div></td><td><a href="http://www.reddit.com/r/worldnews">reddit.com/r/worldnews</a></td><td>6815057 subs</td></tr>
-                        <tr><td><div class="index">16.</div></td><td><a href="http://www.reddit.com/r/news">reddit.com/r/news</a></td><td>544345 subs</td></tr>
-                        <tr><td><div class="index">17.</div></td><td><a href="http://www.reddit.com/r/mildlyinteresting">reddit.com/r/mildlyinteresting</a></td><td>4140477 subs</td></tr>
-                        <tr><td><div class="index">18.</div></td><td><a href="http://www.reddit.com/r/wow">reddit.com/r/wow</a></td><td>2022647 subs</td></tr>
-                        <tr><td><div class="index">19.</div></td><td><a href="http://www.reddit.com/r/reactiongifs">reddit.com/r/reactiongifs</a></td><td>187379 subs</td></tr>
-                        <tr><td><div class="index">20.</div></td><td><a href="http://www.reddit.com/r/space">reddit.com/r/space</a></td><td>450733 subs</td></tr>
-                        <tr><td><div class="index">10.</div></td><td><a href="http://www.reddit.com/r/technology">reddit.com/r/technology</a></td><td>1729380 subs</td></tr>
-                        <tr><td><div class="index">11.</div></td><td><a href="http://www.reddit.com/r/movies">reddit.com/r/movies</a></td><td>5074119 subs</td></tr>
-                        <tr><td><div class="index">12.</div></td><td><a href="http://www.reddit.com/r/Android">reddit.com/r/Android</a></td><td>5913950 subs</td></tr>
-                        <tr><td><div class="index">13.</div></td><td><a href="http://www.reddit.com/r/nba">reddit.com/r/nba</a></td><td>474332 subs</td></tr>
-                        <tr><td><div class="index">14.</div></td><td><a href="http://www.reddit.com/r/Showerthoughts">reddit.com/r/Showerthoughts</a></td><td>224940 subs</td></tr>
-                        <tr><td><div class="index">15.</div></td><td><a href="http://www.reddit.com/r/Games">reddit.com/r/Games</a></td><td>1713898 subs</td></tr>
-                        <tr><td><div class="index">16.</div></td><td><a href="http://www.reddit.com/r/politics">reddit.com/r/politics</a></td><td>537056 subs</td></tr>
-                        <tr><td><div class="index">17.</div></td><td><a href="http://www.reddit.com/r/DotAsoccer">reddit.com/r/DotAsoccer</a></td><td>3088516 subs</td></tr>
-                        <tr><td><div class="index">18.</div></td><td><a href="http://www.reddit.com/r/DestinyTheGame">reddit.com/r/DestinyTheGame</a></td><td>191413 subs</td></tr>
-                        <tr><td><div class="index">19.</div></td><td><a href="http://www.reddit.com/r/GlobalOffensive">reddit.com/r/GlobalOffensive</a></td><td>291892 subs</td></tr>
+                        <tbody id="results-table">
+                        </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="block" id="subreddit-block" style="display:none">
+            <div class="block-inner">
+                <h1>/r/<span class="subreddit-name"></span></h1>
+                Url: <span id="link"></span>
+                <div id="subreddit-content" style="width:100%; height:200px; overflow-y:auto; color:#ddd; font-size:14px; font-weight: normal; overflow-x:hidden">Descriptive content</div>
+                <h2>Terms:</h2>
+                <div id="terms" style="margin-top:5px; border-radius:5px; border:10px white solid; padding:5px; width:calc(100% - 30px); height:120px; overflow-y:auto; background:#333;">
+                    Tags
+                </div>
+            </div>
+        </div>
+        <div class="block" id="term-block" style="display:none">
+            <div class="block-inner">
+                <h1>Term: <span class="term-name"></span></h1>
+                Occurances: <span id="term-count"></span><br>
+                Rank: <span id="term-rank"></span><br>
+               <h2>Occurances:</h2>
+                <div id="term-occurances" style="margin-top:5px; border-radius:5px; border:10px white solid; padding:5px; width:calc(100% - 30px); height:120px; overflow-y:auto; background:#333;">
+                    Tags
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script src="static/main.js"></script>
 </body>
 </html>
