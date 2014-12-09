@@ -11,8 +11,21 @@ def get_score(username):
     r = praw.Reddit(user_agent="Reddit Recommend: Subreddit Recommender v3 [User-Grabber]")
     redditor = r.get_redditor(username)
     comment_len = 0
-    t = open('tfidf_subs.txt', 'r')
+    t = open('tfidf1_subs.txt', 'r')
     tf_idf = json.loads(t.read())
+    
+    r = open('tfidf2_subs.txt', 'r')
+    tf_idf2 = json.loads(r.read())
+    
+    s = open('tfidf3_subs.txt', 'r')
+    tf_idf3 = json.loads(s.read())
+    
+    for key in tf_idf2:
+        tf_idf[key] = tf_idf2[key]
+    for key in tf_idf3:
+        tf_idf[key] = tf_idf3[key]  
+    
+    
     user_words = {}
     df_words = {}
     for comment in redditor.get_comments(limit=100):
